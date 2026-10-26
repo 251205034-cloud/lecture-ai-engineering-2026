@@ -23,7 +23,7 @@ def response(text="テスト用の回答", usage=True):
 
 @pytest.fixture
 def requests(monkeypatch):
-    monkeypatch.setenv("GEMINI_API_KEY", "test-placeholder-not-a-real-key")
+    monkeypatch.setenv("GEMINIAPIKEY", "test-placeholder-not-a-real-key")
     # 通信は下のモックで置換する。開発環境のプロキシ設定には依存しない。
     monkeypatch.setattr(ask.genai, "Client", lambda **kwargs: Client(
         **kwargs, http_options=types.HttpOptions(
@@ -122,6 +122,6 @@ def test_cli_default_question(monkeypatch, requests):
 
 
 def test_missing_api_key(monkeypatch):
-    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
-    with pytest.raises(SystemExit, match="GEMINI_API_KEY"):
+    monkeypatch.delenv("GEMINIAPIKEY", raising=False)
+    with pytest.raises(SystemExit, match="GEMINIAPIKEY"):
         ask.chat()
