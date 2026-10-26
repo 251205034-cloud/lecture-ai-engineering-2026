@@ -1,12 +1,10 @@
-"""第1回: LLMへの単発質問と、履歴を保持する対話。
+"""第1回: 素のLLMに1回だけ質問するスクリプト。
 
 使い方:
     uv run python -m app.ask "LoRAとは何ですか？"
     uv run python -m app.ask            # 質問を省略すると、講座に固有の質問をする
-    uv run python -m app.ask --chat     # /exit で終了、/reset で履歴を消去
 
-通常はツールも会話履歴も持たない「素の」呼び出し。
---chat の履歴は実行中のメモリだけに保持し、ファイルには保存しない。
+ツールも会話履歴も持たない「素の」呼び出し。
 講座に固有のことを聞くと、「分からない」と答えるか、一般論でもっともらしく答える
 （講座の実際とは違う）ことを確かめよう。
 （第3回で、用語集を検索できるエージェントにして改善する）
@@ -24,7 +22,6 @@ DEFAULT_QUESTION = "AIE2026の講座の宿題にある「3レベル」とは何�
 
 
 def print_usage(response: types.GenerateContentResponse) -> None:
-    """API が報告した各応答のトークン数を表示する。未取得は0と区別する。"""
     usage = response.usage_metadata
     input_count = usage.prompt_token_count if usage else None
     output_count = usage.candidates_token_count if usage else None
@@ -40,7 +37,6 @@ def ask(question: str) -> str:
 
 
 def chat(initial_question: str | None = None) -> None:
-    """同じSDKチャットを再利用して、過去の質問と回答を次の質問に渡す。"""
     with genai.Client(api_key=get_api_key()) as client:
         session = client.chats.create(model=MODEL)
         print("対話モード：/exit で終了、/reset で履歴を消去。履歴は終了時に消えます。")
@@ -65,7 +61,6 @@ def chat(initial_question: str | None = None) -> None:
                 print("\n対話を終了します。")
                 break
             except errors.APIError as e:
-                # 応答の詳細にはリクエスト情報が含まれうるため表示しない。
                 print(api_error_message(e.code))
                 print("自動再試行はしません。質問を再入力するか /exit で終了してください。")
 
