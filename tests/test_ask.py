@@ -1,5 +1,3 @@
-"""実APIを呼ばず、実SDKが送る会話履歴とCLIの動作を検証する。"""
-
 from copy import deepcopy
 
 import pytest
@@ -24,7 +22,6 @@ def response(text="テスト用の回答", usage=True):
 @pytest.fixture
 def requests(monkeypatch):
     monkeypatch.setenv("GEMINIAPIKEY", "test-placeholder-not-a-real-key")
-    # 通信は下のモックで置換する。開発環境のプロキシ設定には依存しない。
     monkeypatch.setattr(ask.genai, "Client", lambda **kwargs: Client(
         **kwargs, http_options=types.HttpOptions(
             client_args={"trust_env": False},
