@@ -1,0 +1,44 @@
+{
+  "source_tag": "lec04-start",
+  "source_commit": "bc41dfac203acff0706b7da10d09339d91830bfe",
+  "model": "gemini-3.5-flash-lite",
+  "temperature": 0,
+  "output_order": "reason -> verdict",
+  "cases_count": 10,
+  "labels_count": 10,
+  "cases_sha256": "75d611503511caede2cfda3ac68b74e33a16c4275e548cbb40c73da4394374c5",
+  "labels_sha256": "6cc251f5aa4dc27f84b97b9feecdfadb292462f113c607d26bd9640fcb8c5289",
+  "versions": {
+    "python": "3.12.14",
+    "pydantic-ai-slim": "2.57.0",
+    "google-genai": "2.31.0"
+  },
+  "runs": [
+    {
+      "result_file": "exercise_before.json",
+      "rubric_file": "rubric_original.md",
+      "run_at": "2026-11-16T16:38:42",
+      "result_sha256": "504838e1141d39a24ea63bd04c8fa1e27c7ffe86a9653bedb2530df34ee48e19",
+      "rubric_sha256": "38b9f33a5ba0a93359ed78651b3048821c58f856d6a9839f79d8e90ba8bd5198"
+    },
+    {
+      "result_file": "homework_before.json",
+      "rubric_file": "rubric_exercise_after.md",
+      "run_at": "2026-11-16T16:40:21",
+      "result_sha256": "8c74e9db5f03fd6663ae5b5c6b2ac1f9100aea7d5b11a5335a40f638dc9fbbd4",
+      "rubric_sha256": "2b3ac9dd2f096bb63dfa4d92a0e7f7b0da2d8863d517de050c0756b775e8c9ca"
+    },
+    {
+      "result_file": "homework_after.json",
+      "rubric_file": "rubric_homework_after.md",
+      "run_at": "2026-11-16T16:41:57",
+      "result_sha256": "d919955aef4e819f4ae771e8a9bf938fef96a6496efff25e81809b34653af313",
+      "rubric_sha256": "a5e4d0438797cc53f2ee8adada201d579698e8713eaeac5e5543f1c9c1498822"
+    }
+  ],
+  "homework_rubric_changes": [
+    "- - 質問に直接答えていて、必要なことが簡潔に書かれている",
+    "+ - 質問に直接答え、説明の予告（例：「〜について説明します」）や終了宣言（例：「以上が〜です」）を省いて、必要な説明が書かれている"
+  ],
+  "hash_normalization": "UTF-8 text with LF line endings"
+}
