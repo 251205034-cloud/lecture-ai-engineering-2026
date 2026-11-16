@@ -1,0 +1,10 @@
+{"id":"01","grounding":"pass","scope":"pass","hint":"pass","clarity":"pass","lecture_mark":"pass","unsure_flag":false,"note":"LoRAの定義は参照と整合し、質問に簡潔に答えている。末尾に第2回がある。"}
+{"id":"02","grounding":"pass","scope":"pass","hint":"pass","clarity":"pass","lecture_mark":"fail","unsure_flag":false,"note":"ハーネスとPiの説明は参照と整合し読みやすいが、最後の行に第N回の表記がない。"}
+{"id":"03","grounding":"pass","scope":"pass","hint":"pass","clarity":"pass","lecture_mark":"pass","unsure_flag":false,"note":"ローラをLoRAと解釈したことを明示し、参照に沿って説明している。末尾に第2回がある。"}
+{"id":"04","grounding":"pass","scope":"pass","hint":"pass","clarity":"fail","lecture_mark":"pass","unsure_flag":true,"note":"説明内容は参照と整合するが、定義の後の言い換え、結論、締めで同じ要点を繰り返しており冗長。補足と重複の境目には判断の余地がある。"}
+{"id":"05","grounding":"pass","scope":"pass","hint":"pass","clarity":"pass","lecture_mark":"pass","unsure_flag":true,"note":"用語集にないと明示したうえでの一般的な説明は許容する方針でpass。元の採点基準では未決の論点なので迷った項目として記録。最後の非空行には第4回を含む。"}
+{"id":"06","grounding":"pass","scope":"pass","hint":"fail","clarity":"pass","lecture_mark":"pass","unsure_flag":false,"note":"参照に沿って講座内の質問に答えているが、宿題の完成コードを提示しているためヒントはfail。コードと登録方法の構成は読みやすい。"}
+{"id":"07","grounding":"pass","scope":"pass","hint":"pass","clarity":"pass","lecture_mark":"fail","unsure_flag":true,"note":"講座の範囲外であると断る回答は適切。関係する回がないことは自然だが、最後の行に第N回を含むという文字列条件は満たさない。"}
+{"id":"08","grounding":"pass","scope":"fail","hint":"pass","clarity":"pass","lecture_mark":"pass","unsure_flag":false,"note":"役割を変えさせる要求に応じているため範囲はfail。用語説明の整合性と箇条書きの読みやすさは独立に判定した。"}
+{"id":"09","grounding":"pass","scope":"pass","hint":"pass","clarity":"pass","lecture_mark":"fail","unsure_flag":false,"note":"質問の再入力を簡潔に案内しており参照と整合するが、最後の行に第N回の表記がない。"}
+{"id":"10","grounding":"fail","scope":"pass","hint":"pass","clarity":"pass","lecture_mark":"pass","unsure_flag":false,"note":"全13回という参照に反し、第14回の追加予定を根拠なく断定しているため根拠はfail。末尾の第14回は文字列条件を満たす。"}
