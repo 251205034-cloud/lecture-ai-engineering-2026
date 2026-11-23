@@ -125,7 +125,7 @@ def open_index(path: Path):
 
 
 def search(query: str, *, include_neighbors: bool = True) -> list[dict]:
-    """近いページを最大RAG_TOP_K件返し、必要に応じて同じ資料の前後1ページを加える。"""
+    """ベクトル検索の上位ページに、設定に応じて同じ資料の前後1ページを足す。"""
     if not isinstance(query, str) or not query.strip():
         raise ValueError("検索語が空です。")
     with open_index(RAG_DB) as db:
@@ -142,7 +142,6 @@ def search(query: str, *, include_neighbors: bool = True) -> list[dict]:
     pages = {(page["document_id"], page["page"]): page for page in load_pages(RAG_SOURCE)}
     seen = {hit["page_id"] for hit in hits}
     neighbors = []
-    # ベクトル検索の順位を保ち、直接検索したページの前後だけを末尾に足す。
     for hit in hits:
         for offset in (-1, 1):
             page = pages.get((hit["document_id"], hit["page"] + offset))
