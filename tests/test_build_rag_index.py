@@ -35,11 +35,46 @@ def test_built_index_can_be_searched(materials, monkeypatch):
     assert result["pages"] == 2  # 第5回の資料は検索対象に含めない
     assert all("章" in text and "ページ" in text for text in texts)
     monkeypatch.setattr(retrieval, "RAG_DB", database)
+    monkeypatch.setattr(retrieval, "RAG_SOURCE", source)
     monkeypatch.setattr(retrieval, "embed_text", lambda *_: [1, 0])
     hits = retrieval.search("質問")
     assert [h["page_id"] for h in hits] == ["lec01-main-p001", "lec02-main-p001"]
     assert hits[0]["content"] == "本文1"
     assert hits[0]["distance"] == pytest.approx(0)
+
+
+def test_search_adds_unique_neighbors_within_the_same_document(tmp_path, monkeypatch):
+    source = tmp_path / "lectures.json"
+    database = tmp_path / "index.sqlite3"
+    documents = []
+    for lecture, numbers in ((1, (1, 2, 3, 4, 5, 8)), (2, (6,))):
+        document_id = f"lec{lecture:02d}-main"
+        pages = [
+            {"id": f"{document_id}-p{number:03d}", "title": f"ページ{number}",
+             "page": number, "content": f"本文{number}"}
+            for number in numbers
+        ]
+        documents.append({"id": document_id, "title": f"講義{lecture}",
+                          "content": [{"section": "章", "content": pages}]})
+    source.write_text(json.dumps(documents, ensure_ascii=False), encoding="utf-8")
+
+    def embed(text, task):
+        return [1, 0] if any(f"本文{number}" in text for number in (1, 3, 5)) else [0, 1]
+
+    build_index(source, database, embedder=embed)
+    monkeypatch.setattr(retrieval, "RAG_DB", database)
+    monkeypatch.setattr(retrieval, "RAG_SOURCE", source)
+    monkeypatch.setattr(retrieval, "RAG_TOP_K", 3)
+    monkeypatch.setattr(retrieval, "embed_text", lambda *_: [1, 0])
+
+    direct_hits = retrieval.search("質問", include_neighbors=False)
+    hits = retrieval.search("質問")
+    assert [hit["page"] for hit in direct_hits] == [1, 3, 5]
+    assert hits[:3] == direct_hits
+    assert [hit["page"] for hit in hits[3:]] == [2, 4]
+    assert all(hit["document_id"] == "lec01-main" for hit in hits)
+    assert hits[3]["content"] == "本文2"
+    assert "distance" not in hits[3]
 
 
 def test_existing_index_survives_failed_rebuild(materials):
