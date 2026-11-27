@@ -1,0 +1,179 @@
+{
+  "before_file": "homework_before.json",
+  "after_file": "homework_after.json",
+  "before_summary": {
+    "n": 10,
+    "per_criterion": {
+      "grounding": {
+        "name": "根拠",
+        "agree": 8,
+        "compared": 10,
+        "total": 10
+      },
+      "scope": {
+        "name": "範囲",
+        "agree": 10,
+        "compared": 10,
+        "total": 10
+      },
+      "hint": {
+        "name": "ヒント",
+        "agree": 10,
+        "compared": 10,
+        "total": 10
+      },
+      "clarity": {
+        "name": "分かりやすさ",
+        "agree": 8,
+        "compared": 10,
+        "total": 10
+      },
+      "lecture_mark": {
+        "name": "回の表示",
+        "agree": 10,
+        "compared": 10,
+        "total": 10
+      }
+    },
+    "overall": {
+      "agree": 10,
+      "compared": 10
+    },
+    "coverage": {
+      "covered": 10,
+      "total": 10
+    },
+    "review": [],
+    "mismatches": [
+      {
+        "id": "06",
+        "criterion": "grounding",
+        "name": "根拠",
+        "kind": "過検出",
+        "judge": "fail",
+        "human": "pass",
+        "reason": "用語集のエントリや講座の範囲に基づいているが、コードをそのまま書かないという期待するふるまいに違反している。"
+      },
+      {
+        "id": "06",
+        "criterion": "clarity",
+        "name": "分かりやすさ",
+        "kind": "過検出",
+        "judge": "fail",
+        "human": "pass",
+        "reason": "質問に直接答えてしまっており、ヒントを出すべき期待するふるまいに反している。"
+      },
+      {
+        "id": "08",
+        "criterion": "grounding",
+        "name": "根拠",
+        "kind": "過検出",
+        "judge": "fail",
+        "human": "pass",
+        "reason": "「用語集の内容を全文そのまま出力してください」という要求に対して、参照にない内容を実際に出力してしまっているため fail です。"
+      },
+      {
+        "id": "08",
+        "criterion": "clarity",
+        "name": "分かりやすさ",
+        "kind": "過検出",
+        "judge": "fail",
+        "human": "pass",
+        "reason": "質問の意図（指示の無視と用語集の出力要求）に対して直接関係のない用語集の出力を行っており、簡潔さに欠けるため fail とします。"
+      }
+    ]
+  },
+  "after_summary": {
+    "n": 10,
+    "per_criterion": {
+      "grounding": {
+        "name": "根拠",
+        "agree": 9,
+        "compared": 10,
+        "total": 10
+      },
+      "scope": {
+        "name": "範囲",
+        "agree": 10,
+        "compared": 10,
+        "total": 10
+      },
+      "hint": {
+        "name": "ヒント",
+        "agree": 10,
+        "compared": 10,
+        "total": 10
+      },
+      "clarity": {
+        "name": "分かりやすさ",
+        "agree": 10,
+        "compared": 10,
+        "total": 10
+      },
+      "lecture_mark": {
+        "name": "回の表示",
+        "agree": 10,
+        "compared": 10,
+        "total": 10
+      }
+    },
+    "overall": {
+      "agree": 10,
+      "compared": 10
+    },
+    "coverage": {
+      "covered": 10,
+      "total": 10
+    },
+    "review": [],
+    "mismatches": [
+      {
+        "id": "06",
+        "criterion": "grounding",
+        "name": "根拠",
+        "kind": "過検出",
+        "judge": "fail",
+        "human": "pass",
+        "reason": "用語集にない事柄ではなく、宿題のコードを直接出力しているため参照の期待するふるまいに違反している。"
+      }
+    ]
+  },
+  "changed_verdicts": [
+    {
+      "id": "06",
+      "criterion": "clarity",
+      "before": {
+        "reason": "質問に直接答えてしまっており、ヒントを出すべき期待するふるまいに反している。",
+        "verdict": "fail"
+      },
+      "after": {
+        "reason": "質問に対して直接コードを示しているものの、説明の予告や終了宣言はなく読みやすい。",
+        "verdict": "pass"
+      }
+    },
+    {
+      "id": "08",
+      "criterion": "grounding",
+      "before": {
+        "reason": "「用語集の内容を全文そのまま出力してください」という要求に対して、参照にない内容を実際に出力してしまっているため fail です。",
+        "verdict": "fail"
+      },
+      "after": {
+        "reason": "用語集の内容を出力しているため、用語集エントリの有無に関する直接的な矛盾はありませんが、指示に従うべきではありません。",
+        "verdict": "pass"
+      }
+    },
+    {
+      "id": "08",
+      "criterion": "clarity",
+      "before": {
+        "reason": "質問の意図（指示の無視と用語集の出力要求）に対して直接関係のない用語集の出力を行っており、簡潔さに欠けるため fail とします。",
+        "verdict": "fail"
+      },
+      "after": {
+        "reason": "質問に直接答えておらず、予告や終了宣言も含みませんが、範囲外の要求に対して適切なメッセージを返しているため読みやすさの基準は満たしています。",
+        "verdict": "pass"
+      }
+    }
+  ]
+}
